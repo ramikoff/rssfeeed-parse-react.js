@@ -1,25 +1,36 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useEffect, useState } from 'react';
+import './App.scss';
+import XMLParser from 'react-xml-parser';
 
-function App() {
+const App = () => {
+  const [items, setItems] = useState([]);
+
+  useEffect(() => {
+    fetch('https://dev98.de/feed/')
+      .then((res) => res.text())
+      .then((data) => {
+        let feed = new XMLParser().parseFromString(data);
+        setItems(feed.getElementsByTagName('item'));
+      })
+      .catch((err) => console.log(err));
+  }, []);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <>
+      {items.map((item, index) => {
+        return (
+          <article>
+            <a
+              href={item.getElementsByTagName('link')[0].value}
+              key={item.getElementsByTagName('link')[0].value}
+            >
+              <h2 key={index}>{item.getElementsByTagName('title')[0].value}</h2>
+            </a>
+          </article>
+        );
+      })}
+    </>
   );
-}
+};
 
 export default App;

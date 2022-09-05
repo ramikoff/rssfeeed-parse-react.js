@@ -1,0 +1,33 @@
+body {
+  background: rgba(246, 235, 43, 0.6);
+}
+#root {
+  margin: 1rem;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-gap: 2rem;
+  background: rgba(246, 235, 43, 0.6);
+}
+img {
+  max-width: 100%;
+  box-shadow: 0 0 3px #b0bec5;
+}
+
+article {
+  background: #2196f3;
+  border-radius: 4px;
+  overflow: hidden;
+  font: 12px/1.1 system-ui, sans-serif;
+  a {
+    text-decoration: none;
+    color: white;
+    &:hover,
+    &:focus {
+      color: black;
+    }
+  }
+  h2 {
+    padding: 1rem 1rem;
+    margin: 0;
+  }
+}
