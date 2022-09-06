@@ -4,7 +4,7 @@ body {
 #root {
   margin: 1rem;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
   grid-gap: 2rem;
   background: rgba(246, 235, 43, 0.6);
 }
@@ -17,7 +17,8 @@ article {
   background: #2196f3;
   border-radius: 4px;
   overflow: hidden;
-  font: 12px/1.1 system-ui, sans-serif;
+  padding: 1rem;
+  font: 16px/1.1 system-ui, sans-serif;
   a {
     text-decoration: none;
     color: white;
@@ -25,9 +26,15 @@ article {
     &:focus {
       color: black;
     }
+    margin-top: 1rem;
   }
   h2 {
     padding: 1rem 1rem;
     margin: 0;
+  }
+  p {
+    padding: 1rem;
+    overflow: hidden;
+    color: white;
   }
 }
