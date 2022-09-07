@@ -8,10 +8,6 @@ body {
   grid-gap: 2rem;
   background: rgba(246, 235, 43, 0.6);
 }
-img {
-  max-width: 100%;
-  box-shadow: 0 0 3px #b0bec5;
-}
 
 article {
   background: #2196f3;
@@ -36,5 +32,8 @@ article {
     padding: 1rem;
     overflow: hidden;
     color: white;
+    a {
+      text-decoration: underline;
+    }
   }
 }

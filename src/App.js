@@ -5,20 +5,21 @@ import XMLParser from 'react-xml-parser';
 const App = () => {
   const [items, setItems] = useState([]);
 
+  const specialSymbolXmlMap = {
+    '&#8211;': '-',
+    '%20': ' ',
+    ' >': '',
+    'Read More': '',
+  };
+
   const ConvertStringToHTML = (str) => {
     const parser = new DOMParser();
     const doc = parser.parseFromString(str, 'text/html');
     return doc.body.innerText;
   };
 
-  const specialSymbolXmlMap = {
-    '&#8211;': '-',
-    '%20': ' ',
-    ' >': '',
-  };
-
   const decodeXml = (string) => {
-    return string.replace(/(&#8211;|%20| >)/g, (item) => {
+    return string.replace(/(&#8211;|%20| >|Read More)/g, (item) => {
       return specialSymbolXmlMap[item];
     });
   };
@@ -38,7 +39,12 @@ const App = () => {
       {items.map((item, index) => {
         return (
           <article>
-            <a href={item.getElementsByTagName('link')[0].value} key={index}>
+            <a
+              href={item.getElementsByTagName('link')[0].value}
+              key={index}
+              target="_blank"
+              rel="noreferrer"
+            >
               <h2 key={index}>
                 {decodeXml(item.getElementsByTagName('title')[0].value)}
               </h2>
@@ -48,6 +54,14 @@ const App = () => {
               {ConvertStringToHTML(
                 decodeXml(item.getElementsByTagName('description')[0].value)
               )}
+              <a
+                target="_blank"
+                rel="noreferrer"
+                href={item.getElementsByTagName('link')[0].value}
+                key={item.getElementsByTagName('link')[0].value}
+              >
+                Read More
+              </a>
             </p>
           </article>
         );
